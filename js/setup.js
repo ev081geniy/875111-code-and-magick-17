@@ -10,7 +10,6 @@ var WIZARD_FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария
 var WIZARD_LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
-var wizards = [];
 
 var classRemove = function (element, className) {
   element.classList.remove(className);
@@ -20,18 +19,12 @@ var randomIndexArray = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-var wizardData = function (firstName, lastName, coatColor, eyesColor) {
+var createWizardData = function () {
   return {
-    name: randomIndexArray(firstName) + ' ' + randomIndexArray(lastName),
-    coatColor: randomIndexArray(coatColor),
-    eyesColor: randomIndexArray(eyesColor)
+    name: randomIndexArray(WIZARD_FIRST_NAMES) + ' ' + randomIndexArray(WIZARD_LAST_NAMES),
+    coatColor: randomIndexArray(WIZARD_COAT_COLORS),
+    eyesColor: randomIndexArray(WIZARD_EYES_COLORS)
   };
-};
-
-var arrayPush = function (array) {
-  for (var i = 0; i < 4; i++) {
-    array.push(wizardData(WIZARD_FIRST_NAMES, WIZARD_LAST_NAMES, WIZARD_COAT_COLORS, WIZARD_EYES_COLORS));
-  }
 };
 
 var renderWizard = function (arrayIndex) {
@@ -42,14 +35,14 @@ var renderWizard = function (arrayIndex) {
   fragment.appendChild(cloneWizard);
 };
 
-var renderFragment = function (array) {
-  for (var i = 0; i < array.length; i++) {
-    renderWizard(wizards[i]);
+var renderFragment = function () {
+  for (var i = 0; i < 4; i++) {
+    var wizardData = createWizardData();
+    renderWizard(wizardData);
   }
   similarList.appendChild(fragment);
 };
 
 classRemove(setup, 'hidden');
-arrayPush(wizards);
-renderFragment(wizards);
+renderFragment();
 classRemove(setupSimilar, 'hidden');
