@@ -24,6 +24,8 @@ var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
+var DEFAULT_POSITION_TOP = 80;
+var DEFAULT_POSITION_LEFT = 50;
 
 var classRemove = function (element, className) {
   element.classList.remove(className);
@@ -62,6 +64,8 @@ classRemove(setupSimilar, 'hidden');
 
 var openPopup = function () {
   setup.classList.remove('hidden');
+  setup.style.top = DEFAULT_POSITION_TOP + 'px';
+  setup.style.left = DEFAULT_POSITION_LEFT + '%';
   document.addEventListener('keydown', onPopupEscPress);
 };
 
@@ -118,15 +122,11 @@ userName.addEventListener('focus', onUserNameFocus);
 
 userName.addEventListener('blur', onUserNameBlur);
 
-setupOpen.addEventListener('click', function () {
-  openPopup();
-});
+setupOpen.addEventListener('click', openPopup);
 
 setupOpen.addEventListener('keydown', onSetupOpenKeyPress);
 
-setupClose.addEventListener('click', function () {
-  closePopup();
-});
+setupClose.addEventListener('click', closePopup);
 
 setupClose.addEventListener('keydown', onSetupCloseKeyPress);
 
